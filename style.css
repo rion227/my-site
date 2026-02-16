@@ -1,7 +1,7 @@
 html, body{
   height:100%;
   margin:0;
-  background:#000;
+  background:#fff; /* ←黒→白 */
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", sans-serif;
 }
 
@@ -31,8 +31,11 @@ html, body{
 .clock{
   position:absolute;
   left:50%;
-  transform:translateX(-50%);
-  bottom:6.5%;                 /* 必要なら 5.8%〜7.5% で微調整 */
+  transform: translateX(-50%) translateY(2px);
+
+  /* ここを調整：灰色バー内に収める */
+  bottom: 8.2%;
+
   color: rgba(255,255,255,0.92);
   font-size: clamp(14px, 2.2vw, 18px);
   font-weight: 600;
@@ -41,6 +44,7 @@ html, body{
   pointer-events:none;
   white-space:nowrap;
 }
+
 
 .img-error{
   position:absolute;
