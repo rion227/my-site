@@ -17,7 +17,15 @@ function formatJST(date) {
 
 function render() {
   const el = document.getElementById("clock");
-  if (el) el.textContent = formatJST(new Date());
+  if (!el) return;
+
+  el.textContent = formatJST(new Date());
+
+  // 1秒ごとの更新に合わせて、ゆっくり点滅を再生
+  el.classList.remove("is-blinking");
+  // 再フローでアニメーションを確実にリスタート
+  void el.offsetWidth;
+  el.classList.add("is-blinking");
 }
 
 function startClock() {
