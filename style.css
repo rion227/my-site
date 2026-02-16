@@ -16,6 +16,10 @@ html, body{
 .card-wrap{
   position:relative;
   display:inline-block;
+
+  /* ★JSがここを書き換える（画像の表示サイズ） */
+  --card-w: 300px;
+  --card-h: 500px;
 }
 
 .card{
@@ -30,18 +34,25 @@ html, body{
   position:absolute;
   left:50%;
   transform:translateX(-50%);
-  bottom: 8px;              /* ← 46px → 28px に下げる */
+
+  /* ★位置：画像の高さに対して下から何%（ここで灰色バー追従） */
+  bottom: calc(var(--card-h) * 0.028);
+
   color:rgba(255,255,255,0.92);
-  font-size: 14px; 
-  font-weight: 400;                     /* ←細字 (300でもOK) */
-  letter-spacing: 0.6px;                /* ←詰める */
+
+  /* ★サイズ：画像の幅に比例（端末でズレない） */
+  font-size: calc(var(--card-w) * 0.040);
+
+  font-weight: 400;
+  letter-spacing: 0.6px;
   text-shadow: none;
   pointer-events:none;
   white-space:nowrap;
 }
 
+/* PCだけちょい詰め */
 @media (min-width: 900px){
   #clock{
-    letter-spacing: 0.2px; /* PCだけ少し詰める */
+    letter-spacing: 0.2px;
   }
 }

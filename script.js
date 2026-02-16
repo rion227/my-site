@@ -29,3 +29,27 @@ function startClock() {
   }, ms);
 }
 startClock();
+
+function syncClockToImage() {
+  const img = document.getElementById("cardImg");
+  const wrap = document.querySelector(".card-wrap");
+  if (!img || !wrap) return;
+
+  const r = img.getBoundingClientRect();
+  wrap.style.setProperty("--card-w", `${r.width}px`);
+  wrap.style.setProperty("--card-h", `${r.height}px`);
+}
+
+window.addEventListener("load", syncClockToImage);
+window.addEventListener("resize", syncClockToImage);
+
+// 画像が遅れて読み込まれる時にも対応
+const img = document.getElementById("cardImg");
+if (img) img.addEventListener("load", syncClockToImage);
+
+// さらに確実に（サイズ変化を監視）
+if (window.ResizeObserver) {
+  const ro = new ResizeObserver(syncClockToImage);
+  const target = document.getElementById("cardImg");
+  if (target) ro.observe(target);
+}
