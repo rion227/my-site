@@ -1,45 +1,46 @@
 html, body {
+  height: 100%;
   margin: 0;
-  padding: 0;
   background: #000;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", sans-serif;
 }
 
-/* スクロール可（画像を絶対固定にしない） */
-.stage {
+/* 画面中央に、必ず画面内に収める */
+.stage{
   min-height: 100dvh;
   display: grid;
   place-items: center;
-  padding: 16px;
+  padding: 12px;
   box-sizing: border-box;
 }
 
-/* 画像の箱：ここを基準に時計を%で置く＝灰色バーに追従 */
-.card-wrap {
+/* 画像サイズに追従する箱 */
+.card-wrap{
   position: relative;
-  width: min(520px, 100%);
+  display: inline-block;
 }
 
-/* 見切れない表示（縦横比維持） */
-.card {
-  width: 100%;
-  height: auto;
+/* ★ここが重要：高さ優先で“画面内に収める” */
+.card{
   display: block;
+  max-width: calc(100vw - 24px);
+  max-height: calc(100dvh - 24px);
+  width: auto;
+  height: auto;
   user-select: none;
   -webkit-user-drag: none;
 }
 
-/* 灰色バー（下のねずみ色枠）に追従する時計
-   ※ 画像内の位置を%指定してるので、スクロール/拡大でも一緒に動く */
-.clock {
+/* 時計：画像に追従（スクロール/拡大でも一緒に動く） */
+.clock{
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
 
-  /* ★灰色バーの“中”に来るように調整（必要ならここだけ微調整） */
+  /* 灰色の下枠の中に来るように（必要なら微調整） */
   bottom: 6.5%;
 
-  color: rgba(255, 255, 255, 0.92);
+  color: rgba(255,255,255,0.92);
   font-size: clamp(14px, 2.2vw, 18px);
   font-weight: 600;
   letter-spacing: 1.5px;
