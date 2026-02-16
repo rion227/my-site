@@ -11,27 +11,21 @@ function formatJST(date) {
   }).formatToParts(date);
 
   const get = (type) => parts.find(p => p.type === type)?.value ?? "";
-
   return `${get("year")}年${get("month")}月${get("day")}日 ` +
          `${get("hour")}時${get("minute")}分${get("second")}秒`;
 }
 
 function render() {
   const el = document.getElementById("clock");
-  if (!el) return;
-  el.textContent = formatJST(new Date());
+  if (el) el.textContent = formatJST(new Date());
 }
 
-// 秒の境界に合わせてズレにくくする
 function startClock() {
   render();
-  const now = new Date();
-  const msToNextSecond = 1000 - now.getMilliseconds();
-
+  const ms = 1000 - new Date().getMilliseconds();
   setTimeout(() => {
     render();
     setInterval(render, 1000);
-  }, msToNextSecond);
+  }, ms);
 }
-
 startClock();
