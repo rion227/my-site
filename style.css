@@ -37,12 +37,11 @@ body::before{
   height:auto;
 }
 
-/* ★classじゃなくて id に直で当てる（確実に当たる） */
 #clock{
   position:absolute;
   left:50%;
   transform:translateX(-50%);
-  bottom:46px;
+  bottom: 28px;              /* ← 46px → 28px に下げる */
   color:rgba(255,255,255,0.92);
   font-size: clamp(14px, 2.2vw, 18px);
   font-weight: 700;
@@ -50,5 +49,5 @@ body::before{
   text-shadow: 0 2px 3px rgba(0,0,0,0.45);
   pointer-events:none;
   white-space:nowrap;
-  outline:2px solid red; /* 確認用：後で消す */
+  outline:2px solid red;     /* 確認用：あとで消す */
 }
