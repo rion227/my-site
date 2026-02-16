@@ -5,27 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>My-Student ID</title>
 
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <!-- iPhoneホーム画面アイコン（180x180推奨） -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+  <!-- 通常のタブ用アイコン（PNGも置くと安定） -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
   <link rel="icon" href="/favicon.ico" sizes="any">
+
+  <!-- Android/Chrome系（任意だけど入れとくと良い） -->
+  <link rel="manifest" href="/site.webmanifest">
 
   <link rel="stylesheet" href="./style.css" />
 </head>
 
 <body>
-  <!-- デバッグで写真範囲を赤枠にしたい時：class="debug" を付ける -->
-  <!-- <body class="debug"> -->
-
   <main class="stage">
     <div class="card-wrap" id="cardWrap">
       <img id="cardImg" class="card" src="./student.jpg" alt="学生証" />
-
-      <!-- 顔写真の範囲だけキラーン（debugで赤枠表示） -->
       <div class="photo-shine" aria-hidden="true"></div>
-
-      <!-- 時刻 -->
       <div id="clock">----</div>
 
-      <!-- 画像が読めなかった時のデバッグ -->
       <div id="imgError" class="img-error" hidden>
         画像が読み込めませんでした：<span id="imgSrc"></span>
       </div>
@@ -34,7 +34,6 @@
 
   <script src="./script.js"></script>
   <script>
-    // 画像読み込み失敗時にURLを表示
     const img = document.getElementById("cardImg");
     const err = document.getElementById("imgError");
     const srcText = document.getElementById("imgSrc");
