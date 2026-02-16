@@ -57,7 +57,7 @@ html, body{
 
 @keyframes clockBlink{
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.45; }
+  30% { opacity: 0.45; }
 }
 
 /* PCだけちょい詰め */
