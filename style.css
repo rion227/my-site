@@ -41,7 +41,7 @@ body::before{
   position:absolute;
   left:50%;
   transform:translateX(-50%);
-  bottom: 6px;              /* ← 46px → 28px に下げる */
+  bottom: 12px;              /* ← 46px → 28px に下げる */
   color:rgba(255,255,255,0.92);
   font-size: clamp(14px, 2.2vw, 18px);
   font-weight: 700;
