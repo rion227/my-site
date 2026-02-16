@@ -17,7 +17,7 @@ html, body{
   position:relative;
   display:inline-block;
 
-  /* ★JSがここを書き換える（画像の表示サイズ） */
+  /* ★JSが画像の表示サイズをここへ反映 */
   --card-w: 300px;
   --card-h: 500px;
 }
@@ -30,39 +30,121 @@ html, body{
   height:auto;
 }
 
+/* =========================
+   時刻（画像に追従 & 端末でサイズブレしない）
+   ========================= */
 #clock{
   position:absolute;
   left:50%;
   transform:translateX(-50%);
 
-  /* ★位置：画像の高さに対して下から何%（ここで灰色バー追従） */
+  /* ★位置：画像の高さに対して下から何% */
   bottom: calc(var(--card-h) * 0.012);
 
   color:rgba(255,255,255,0.92);
 
-  /* ★サイズ：画像の幅に比例（端末でズレない） */
+  /* ★サイズ：画像の幅に比例（スマホ拡大等で変わりにくい） */
   font-size: calc(var(--card-w) * 0.036);
 
-  font-weight: 400;
-  letter-spacing: 0.6px;
+  font-weight: 300;
+  letter-spacing: 0.4px;
   text-shadow: none;
   pointer-events:none;
   white-space:nowrap;
 }
 
-
+/* 点滅（必要ならscript.jsで付け外し） */
 #clock.is-blinking{
   animation: clockBlink 0.9s ease-in-out;
 }
-
 @keyframes clockBlink{
   0%, 100% { opacity: 1; }
   30% { opacity: 0.45; }
 }
 
-/* PCだけちょい詰め */
+/* PCだけほんの少し詰める */
 @media (min-width: 900px){
   #clock{
     letter-spacing: 0.2px;
   }
+}
+
+/* =========================
+   顔写真だけ「キラーン」エフェクト
+   ========================= */
+/*
+  ★ここが写真の範囲（%）：
+  ズレたらここを微調整してね
+
+  左:   --photo-left
+  上:   --photo-top
+  幅:   --photo-w
+  高さ: --photo-h
+*/
+.card-wrap{
+  --photo-left: 0.16;  /* 16% */
+  --photo-top:  0.085; /* 8.5% */
+  --photo-w:    0.68;  /* 68% */
+  --photo-h:    0.285; /* 28.5% */
+}
+
+.photo-shine{
+  position:absolute;
+  left: calc(var(--card-w) * var(--photo-left));
+  top:  calc(var(--card-h) * var(--photo-top));
+  width:  calc(var(--card-w) * var(--photo-w));
+  height: calc(var(--card-h) * var(--photo-h));
+  overflow:hidden;
+  pointer-events:none;
+
+  /* 写真の角が直角なので基本0でOK。少し丸めたいなら 4px とか */
+  border-radius: 0px;
+}
+
+/* 斜めの光の膜 */
+.photo-shine::before{
+  content:"";
+  position:absolute;
+  top:-40%;
+  left:-80%;
+  width:60%;
+  height:180%;
+  transform: rotate(25deg);
+  opacity:0;
+
+  /* 薄い膜（白〜透明のグラデ） */
+  background: linear-gradient(
+    to right,
+    rgba(255,255,255,0.00) 0%,
+    rgba(255,255,255,0.10) 25%,
+    rgba(255,255,255,0.28) 50%,
+    rgba(255,255,255,0.10) 75%,
+    rgba(255,255,255,0.00) 100%
+  );
+
+  animation: shineSweep 2s linear infinite;
+}
+
+/* 2秒に1回、流れてる時間は短め→止まってる時間は長め */
+@keyframes shineSweep{
+  0%   { transform: translateX(-140%) rotate(25deg); opacity:0; }
+  8%   { opacity:0.25; }
+  35%  { transform: translateX(240%) rotate(25deg); opacity:0.25; }
+  45%  { opacity:0; }
+  100% { transform: translateX(240%) rotate(25deg); opacity:0; }
+}
+
+/* デバッグ表示（普段は見えない） */
+.img-error{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  background:rgba(0,0,0,0.7);
+  color:#fff;
+  padding:10px 12px;
+  border-radius:8px;
+  font-size:12px;
+  max-width:90%;
+  word-break:break-all;
 }

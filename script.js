@@ -21,10 +21,9 @@ function render() {
 
   el.textContent = formatJST(new Date());
 
-  // 1秒ごとの更新に合わせて、ゆっくり点滅を再生
+  // 1秒ごとの更新に合わせて点滅を再生（不要ならここ消してOK）
   el.classList.remove("is-blinking");
-  // 再フローでアニメーションを確実にリスタート
-  void el.offsetWidth;
+  void el.offsetWidth; // reflow
   el.classList.add("is-blinking");
 }
 
@@ -38,7 +37,8 @@ function startClock() {
 }
 startClock();
 
-function syncClockToImage() {
+/* 画像の表示サイズに合わせてCSS変数を更新（時計とキラーン範囲がズレない） */
+function syncToImage() {
   const img = document.getElementById("cardImg");
   const wrap = document.querySelector(".card-wrap");
   if (!img || !wrap) return;
@@ -48,16 +48,14 @@ function syncClockToImage() {
   wrap.style.setProperty("--card-h", `${r.height}px`);
 }
 
-window.addEventListener("load", syncClockToImage);
-window.addEventListener("resize", syncClockToImage);
+window.addEventListener("load", syncToImage);
+window.addEventListener("resize", syncToImage);
 
-// 画像が遅れて読み込まれる時にも対応
 const img = document.getElementById("cardImg");
-if (img) img.addEventListener("load", syncClockToImage);
+if (img) img.addEventListener("load", syncToImage);
 
-// さらに確実に（サイズ変化を監視）
 if (window.ResizeObserver) {
-  const ro = new ResizeObserver(syncClockToImage);
+  const ro = new ResizeObserver(syncToImage);
   const target = document.getElementById("cardImg");
   if (target) ro.observe(target);
 }
