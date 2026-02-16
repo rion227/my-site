@@ -1,9 +1,4 @@
-function pad2(n) {
-  return String(n).padStart(2, "0");
-}
-
 function formatJST(date) {
-  // JSTで「年月日 時分秒」を作る
   const parts = new Intl.DateTimeFormat("ja-JP", {
     timeZone: "Asia/Tokyo",
     year: "numeric",
@@ -21,11 +16,22 @@ function formatJST(date) {
          `${get("hour")}時${get("minute")}分${get("second")}秒`;
 }
 
-function tick() {
+function render() {
   const el = document.getElementById("clock");
   if (!el) return;
   el.textContent = formatJST(new Date());
 }
 
-tick();
-setInterval(tick, 1000);
+// 秒の境界に合わせてズレにくくする
+function startClock() {
+  render();
+  const now = new Date();
+  const msToNextSecond = 1000 - now.getMilliseconds();
+
+  setTimeout(() => {
+    render();
+    setInterval(render, 1000);
+  }, msToNextSecond);
+}
+
+startClock();
