@@ -50,6 +50,16 @@ html, body{
   white-space:nowrap;
 }
 
+
+#clock.is-blinking{
+  animation: clockBlink 0.9s ease-in-out;
+}
+
+@keyframes clockBlink{
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+
 /* PCだけちょい詰め */
 @media (min-width: 900px){
   #clock{
