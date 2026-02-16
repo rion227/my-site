@@ -29,19 +29,3 @@ function startClock() {
   }, ms);
 }
 startClock();
-
-
-// --- debug: clockに強制スタイルを当てる（CSSが壊れてても確実） ---
-window.addEventListener("load", () => {
-  const el = document.getElementById("clock");
-  if (!el) return;
-
-  el.style.position = "absolute";
-  el.style.left = "50%";
-  el.style.transform = "translateX(-50%)";
-  el.style.bottom = "46px";           // ←ここで位置が変わるはず
-  el.style.color = "white";
-  el.style.fontWeight = "700";
-  el.style.outline = "2px solid red"; // ←赤枠が出るはず
-  el.style.zIndex = "9999";
-});
