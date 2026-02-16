@@ -6,12 +6,13 @@
   <title>My-Student ID</title>
   <link rel="stylesheet" href="./style.css" />
 </head>
+
 <body>
   <main class="stage">
-    <div class="card-wrap">
+    <div class="card-wrap" id="cardWrap">
       <img id="cardImg" class="card" src="./student.jpg" alt="学生証" />
 
-      <!-- 顔写真の部分だけ “キラーン” -->
+      <!-- 顔写真の範囲だけ（debug付けると赤枠） -->
       <div class="photo-shine" aria-hidden="true"></div>
 
       <!-- 時刻 -->
@@ -26,6 +27,7 @@
 
   <script src="./script.js"></script>
   <script>
+    // 画像読み込み失敗時にURLを表示
     const img = document.getElementById("cardImg");
     const err = document.getElementById("imgError");
     const srcText = document.getElementById("imgSrc");

@@ -17,9 +17,15 @@ html, body{
   position:relative;
   display:inline-block;
 
-  /* ★JSが画像の表示サイズをここへ反映 */
+  /* JSが「表示中の画像サイズ(px)」をここに入れる（追従の要） */
   --card-w: 300px;
   --card-h: 500px;
+
+  /* 顔写真範囲（画像サイズに対する割合）※ズレたらここだけ調整 */
+  --photo-left: 0.179;
+  --photo-top:  0.060;
+  --photo-w:    0.625;
+  --photo-h:    0.345;
 }
 
 .card{
@@ -30,20 +36,18 @@ html, body{
   height:auto;
 }
 
-/* =========================
-   時刻（画像に追従 & 端末でサイズブレしない）
-   ========================= */
+/* ========= 時刻（画像に追従） ========= */
 #clock{
   position:absolute;
   left:50%;
   transform:translateX(-50%);
 
-  /* ★位置：画像の高さに対して下から何% */
+  /* 位置：画像の高さに対して下から何% */
   bottom: calc(var(--card-h) * 0.012);
 
-  color:rgba(255,255,255,0.92);
+  color: rgba(255,255,255,0.92);
 
-  /* ★サイズ：画像の幅に比例（スマホ拡大等で変わりにくい） */
+  /* サイズ：画像の幅に比例（スマホの拡大率などで暴れにくい） */
   font-size: calc(var(--card-w) * 0.036);
 
   font-weight: 300;
@@ -53,7 +57,12 @@ html, body{
   white-space:nowrap;
 }
 
-/* 点滅（必要ならscript.jsで付け外し） */
+/* PCだけほんの少し詰める */
+@media (min-width: 900px){
+  #clock{ letter-spacing: 0.2px; }
+}
+
+/* 点滅（必要ならJSで class を付ける） */
 #clock.is-blinking{
   animation: clockBlink 0.9s ease-in-out;
 }
@@ -62,84 +71,61 @@ html, body{
   30% { opacity: 0.45; }
 }
 
-/* PCだけほんの少し詰める */
-@media (min-width: 900px){
-  #clock{
-    letter-spacing: 0.2px;
-  }
-}
-
-/* =========================
-   顔写真だけ「キラーン」エフェクト
-   ========================= */
-/*
-  ★ここが写真の範囲（%）：
-  ズレたらここを微調整してね
-
-  左:   --photo-left
-  上:   --photo-top
-  幅:   --photo-w
-  高さ: --photo-h
-*/
-.card-wrap{
-  --photo-left: 0.179;  /* ←少し左へ */
-  --photo-top:  0.06;  /* ←少し上へ */
-  --photo-w:    0.625;  /* ←横幅を少し縮める */
-  --photo-h:    0.345;  /* ←縦を少し縮める */
-}
-
+/* ========= 顔写真だけ「キラーン」 ========= */
 .photo-shine{
   position:absolute;
-  left: calc(var(--card-w) * var(--photo-left));
-  top:  calc(var(--card-h) * var(--photo-top));
+  left:   calc(var(--card-w) * var(--photo-left));
+  top:    calc(var(--card-h) * var(--photo-top));
   width:  calc(var(--card-w) * var(--photo-w));
   height: calc(var(--card-h) * var(--photo-h));
+
   overflow:hidden;
   pointer-events:none;
-  border-radius: 0px;
-
-  outline: 2px solid red;     /* ←消したければこの1行を削除 */
-  outline-offset: -2px;
-  
+  border-radius: 0; /* 角丸にしたければ数値入れる */
 }
 
-/* 斜めの光の膜 */
+/* デバッグ：範囲が分かる赤枠（すぐ消せる） */
+.photo-shine.debug{
+  outline: 2px solid red;
+  outline-offset: -2px;
+}
+
 .photo-shine::before{
   content:"";
   position:absolute;
   top:-40%;
   left:-80%;
-  width:70%;       /* 少し太く */
+  width:72%;
   height:200%;
   transform: rotate(25deg);
   opacity:0;
 
-  /* ★濃くする（真ん中の白を強める） */
+  /* 少し濃く */
   background: linear-gradient(
     to right,
     rgba(255,255,255,0.00) 0%,
-    rgba(255,255,255,0.22) 25%,
-    rgba(255,255,255,0.70) 50%, /* ←ここを濃く */
-    rgba(255,255,255,0.22) 75%,
+    rgba(255,255,255,0.28) 25%,
+    rgba(255,255,255,0.78) 50%,
+    rgba(255,255,255,0.28) 75%,
     rgba(255,255,255,0.00) 100%
   );
 
-  /* ★2秒に1回発動（全体2s）、その中で1.3sかけて流す */
+  /* 2秒に1回、そのうち約1.3秒で流す */
   animation: shineCycle 2s linear infinite;
 }
 
 @keyframes shineCycle{
-  /* 0%〜65%（=約1.3秒）で左→右へ流す */
+  /* 0%→65%（約1.3秒）で流れる */
   0%   { transform: translateX(-140%) rotate(25deg); opacity:0; }
-  6%   { opacity:0.55; } /* すぐ見えるように */
-  65%  { transform: translateX(240%) rotate(25deg); opacity:0.55; }
+  6%   { opacity:0.62; }
+  65%  { transform: translateX(240%) rotate(25deg); opacity:0.62; }
 
-  /* 残り0.7秒は消えて待機 */
+  /* 残りは消えて待機 */
   66%  { opacity:0; }
   100% { transform: translateX(240%) rotate(25deg); opacity:0; }
 }
 
-/* デバッグ表示（普段は見えない） */
+/* ========= 画像ロード失敗デバッグ ========= */
 .img-error{
   position:absolute;
   left:50%;
