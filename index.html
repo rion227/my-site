@@ -4,15 +4,23 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>My-Student ID</title>
+
+  <!-- favicon（同じ階層に favicon.ico を置く） -->
+  <link rel="icon" href="./favicon.ico" />
+  <link rel="shortcut icon" href="./favicon.ico" />
+
   <link rel="stylesheet" href="./style.css" />
 </head>
 
 <body>
+  <!-- デバッグで写真範囲を赤枠にしたい時：class="debug" を付ける -->
+  <!-- <body class="debug"> -->
+
   <main class="stage">
     <div class="card-wrap" id="cardWrap">
       <img id="cardImg" class="card" src="./student.jpg" alt="学生証" />
 
-      <!-- 顔写真の範囲だけ（debug付けると赤枠） -->
+      <!-- 顔写真の範囲だけキラーン（debugで赤枠表示） -->
       <div class="photo-shine" aria-hidden="true"></div>
 
       <!-- 時刻 -->
