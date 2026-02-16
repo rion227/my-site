@@ -43,12 +43,14 @@ body::before{
   -webkit-user-drag:none;
 }
 
-/* ★時計位置：いまのスクショだと低いので上げる */
 .clock{
   position:absolute;
   left:50%;
-  transform:translateX(-50%);
-  bottom: 6%;  /* ←ここで灰色バー内に合わせる（必要なら 8.6〜10.0%で微調整） */
+  transform: translateX(-50%);
+  outline: 2px solid red;
+  
+  /* ★ここが本命：画像の一番下からの距離で調整 */
+  bottom: 46px;
 
   color: rgba(255,255,255,0.92);
   font-size: clamp(14px, 2.2vw, 18px);
