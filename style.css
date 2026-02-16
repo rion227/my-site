@@ -96,9 +96,11 @@ html, body{
   height: calc(var(--card-h) * var(--photo-h));
   overflow:hidden;
   pointer-events:none;
-
-  /* 写真の角が直角なので基本0でOK。少し丸めたいなら 4px とか */
   border-radius: 0px;
+
+  outline: 2px solid red;     /* ←消したければこの1行を削除 */
+  outline-offset: -2px;
+  
 }
 
 /* 斜めの光の膜 */
@@ -107,30 +109,33 @@ html, body{
   position:absolute;
   top:-40%;
   left:-80%;
-  width:60%;
-  height:180%;
+  width:70%;       /* 少し太く */
+  height:200%;
   transform: rotate(25deg);
   opacity:0;
 
-  /* 薄い膜（白〜透明のグラデ） */
+  /* ★濃くする（真ん中の白を強める） */
   background: linear-gradient(
     to right,
     rgba(255,255,255,0.00) 0%,
-    rgba(255,255,255,0.10) 25%,
-    rgba(255,255,255,0.28) 50%,
-    rgba(255,255,255,0.10) 75%,
+    rgba(255,255,255,0.18) 25%,
+    rgba(255,255,255,0.48) 50%,
+    rgba(255,255,255,0.18) 75%,
     rgba(255,255,255,0.00) 100%
   );
 
-  animation: shineSweep 2s linear infinite;
+  /* ★2秒に1回発動（全体2s）、その中で1.3sかけて流す */
+  animation: shineCycle 2s linear infinite;
 }
 
-/* 2秒に1回、流れてる時間は短め→止まってる時間は長め */
-@keyframes shineSweep{
+@keyframes shineCycle{
+  /* 0%〜65%（=約1.3秒）で左→右へ流す */
   0%   { transform: translateX(-140%) rotate(25deg); opacity:0; }
-  8%   { opacity:0.25; }
-  35%  { transform: translateX(240%) rotate(25deg); opacity:0.25; }
-  45%  { opacity:0; }
+  6%   { opacity:0.55; } /* すぐ見えるように */
+  65%  { transform: translateX(240%) rotate(25deg); opacity:0.55; }
+
+  /* 残り0.7秒は消えて待機 */
+  66%  { opacity:0; }
   100% { transform: translateX(240%) rotate(25deg); opacity:0; }
 }
 
