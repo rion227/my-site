@@ -1,16 +1,14 @@
 html, body{
   height:100%;
   margin:0;
-  background:#fff !important; /* ←黒を完全に潰す */
+  background:#fff;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", sans-serif;
 }
 
-/* ★反映確認：これが出なかったら古いCSSを見てる */
 body::before{
-  content:"CSS v101";
+  content:"CSS v102";
   position:fixed;
-  top:0;
-  left:0;
+  top:0; left:0;
   z-index:9999;
   font-size:12px;
   padding:2px 6px;
@@ -24,7 +22,6 @@ body::before{
   place-items:center;
   padding:12px;
   box-sizing:border-box;
-  background:#fff !important;
 }
 
 .card-wrap{
@@ -32,43 +29,26 @@ body::before{
   display:inline-block;
 }
 
-/* 画面内に必ず収める（PCでデカすぎ防止、スマホで見切れ防止） */
 .card{
   display:block;
   max-width: calc(100vw - 24px);
   max-height: calc(100dvh - 24px);
   width:auto;
   height:auto;
-  user-select:none;
-  -webkit-user-drag:none;
 }
 
-.clock{
+/* ★classじゃなくて id に直で当てる（確実に当たる） */
+#clock{
   position:absolute;
   left:50%;
-  transform: translateX(-50%);
-  outline: 2px solid red;
-  
-  /* ★ここが本命：画像の一番下からの距離で調整 */
-  bottom: 46px;
-
-  color: rgba(255,255,255,0.92);
+  transform:translateX(-50%);
+  bottom:46px;
+  color:rgba(255,255,255,0.92);
   font-size: clamp(14px, 2.2vw, 18px);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 1.5px;
   text-shadow: 0 2px 3px rgba(0,0,0,0.45);
   pointer-events:none;
   white-space:nowrap;
-}
-
-.img-error{
-  position:absolute;
-  left:50%;
-  transform:translateX(-50%);
-  top:10px;
-  color:#fff;
-  font-size:12px;
-  background:rgba(255,0,0,0.25);
-  padding:6px 10px;
-  border-radius:8px;
+  outline:2px solid red; /* 確認用：後で消す */
 }
