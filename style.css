@@ -5,17 +5,6 @@ html, body{
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", sans-serif;
 }
 
-body::before{
-  content:"CSS v108";
-  position:fixed;
-  top:0; left:0;
-  z-index:9999;
-  font-size:12px;
-  padding:2px 6px;
-  color:#fff;
-  background:rgba(255,0,0,0.6);
-}
-
 .stage{
   min-height:100dvh;
   display:grid;
@@ -43,7 +32,7 @@ body::before{
   transform:translateX(-50%);
   bottom: 8px;              /* ← 46px → 28px に下げる */
   color:rgba(255,255,255,0.92);
-  font-size: clamp(14px, 1.3vw, 15px);
+  font-size: 14px; 
   font-weight: 400;                     /* ←細字 (300でもOK) */
   letter-spacing: 0.6px;                /* ←詰める */
   text-shadow: none;
