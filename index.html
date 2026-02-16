@@ -3,34 +3,22 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Student Card</title>
-
-  <!-- 基準パス -->
-  <base href="/my-site/">
-
-  <!-- ★キャッシュ対策：数字を変えるたびに必ず最新が反映される -->
-  <link rel="stylesheet" href="style.css?v=112" />
+  <title>My-Student ID</title>
+  <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
   <main class="stage">
     <div class="card-wrap">
-      <img
-        id="cardImg"
-        class="card"
-        src="student.jpg?v=111"
-        alt="学生証"
-      />
+      <img id="cardImg" class="card" src="./student.jpg" alt="学生証" />
+      <div id="clock">----</div>
 
-      <div id="clock" class="clock">----</div>
-
-      <!-- 画像が読めなかった時のデバッグ -->
       <div id="imgError" class="img-error" hidden>
         画像が読み込めませんでした：<span id="imgSrc"></span>
       </div>
     </div>
   </main>
 
-  <script src="script.js?v=112"></script>
+  <script src="./script.js"></script>
   <script>
     const img = document.getElementById("cardImg");
     const err = document.getElementById("imgError");
