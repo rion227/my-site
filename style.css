@@ -6,7 +6,7 @@ html, body{
 }
 
 body::before{
-  content:"CSS v104";
+  content:"CSS v105";
   position:fixed;
   top:0; left:0;
   z-index:9999;
@@ -41,11 +41,11 @@ body::before{
   position:absolute;
   left:50%;
   transform:translateX(-50%);
-  bottom: 12px;              /* ← 46px → 28px に下げる */
+  bottom: 8px;              /* ← 46px → 28px に下げる */
   color:rgba(255,255,255,0.92);
-  font-size: clamp(14px, 2.2vw, 18px);
+  font-size: clamp(12px, 1.8vw, 16px);
   font-weight: 700;
-  letter-spacing: 1.5px;
+  letter-spacing: 1.2px;
   text-shadow: 0 2px 3px rgba(0,0,0,0.45);
   pointer-events:none;
   white-space:nowrap;
