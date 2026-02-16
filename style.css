@@ -82,10 +82,10 @@ html, body{
   高さ: --photo-h
 */
 .card-wrap{
-  --photo-left: 0.178;  /* ←少し左へ */
+  --photo-left: 0.179;  /* ←少し左へ */
   --photo-top:  0.06;  /* ←少し上へ */
   --photo-w:    0.625;  /* ←横幅を少し縮める */
-  --photo-h:    0.35;  /* ←縦を少し縮める */
+  --photo-h:    0.345;  /* ←縦を少し縮める */
 }
 
 .photo-shine{
