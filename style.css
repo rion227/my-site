@@ -82,8 +82,8 @@ html, body{
   高さ: --photo-h
 */
 .card-wrap{
-  --photo-left: 0.176;  /* ←少し左へ */
-  --photo-top:  0.08;  /* ←少し上へ */
+  --photo-left: 0.177;  /* ←少し左へ */
+  --photo-top:  0.07;  /* ←少し上へ */
   --photo-w:    0.63;  /* ←横幅を少し縮める */
   --photo-h:    0.34;  /* ←縦を少し縮める */
 }
