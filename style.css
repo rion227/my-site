@@ -6,7 +6,7 @@ html, body{
 }
 
 body::before{
-  content:"CSS v106";
+  content:"CSS v107";
   position:fixed;
   top:0; left:0;
   z-index:9999;
@@ -43,11 +43,17 @@ body::before{
   transform:translateX(-50%);
   bottom: 8px;              /* ← 46px → 28px に下げる */
   color:rgba(255,255,255,0.92);
-  font-size: clamp(10px, 1.4vw, 14px);
+  font-size: clamp(13px, 1.2vw, 15px);
   font-weight: 400;                     /* ←細字 (300でもOK) */
-  letter-spacing: 0.8px;                /* ←詰める */
-  text-shadow: 0 1px 2px rgba(0,0,0,0.35); /* ←影も弱める */
+  letter-spacing: 0.6px;                /* ←詰める */
+  text-shadow: none;
   pointer-events:none;
   white-space:nowrap;
   outline:2px solid red;     /* 確認用：あとで消す */
+}
+
+@media (min-width: 900px){
+  #clock{
+    letter-spacing: 0.3px; /* PCだけ少し詰める */
+  }
 }
